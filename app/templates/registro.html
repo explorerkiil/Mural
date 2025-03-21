@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=1.1">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2 class="auth-title">Criar Conta</h2>
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                <div class="form-group text-center">
+                    <label class="form-label">Nome de usuário</label>
+                    <input type="text" name="username" class="auth-input" required>
+                    {% if form.username.errors %}
+                        <div class="error-message">
+                            {% for error in form.username.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group text-center">
+                    <label class="form-label">Senha</label>
+                    <input type="password" name="password1" class="auth-input" required>
+                    {% if form.password1.errors %}
+                        <div class="error-message">
+                            {% for error in form.password1.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group text-center">
+                    <label class="form-label">Confirmar Senha</label>
+                    <input type="password" name="password2" class="auth-input" required>
+                    {% if form.password2.errors %}
+                        <div class="error-message">
+                            {% for error in form.password2.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if form.non_field_errors %}
+                    <div class="error-message">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="password-rules">
+                    <h3>Requisitos da senha:</h3>
+                    <ul>
+                        <li>Mínimo de 8 caracteres</li>
+                        <li>Deve conter letras e números</li>
+                        <li>Não pode ser similar ao nome de usuário</li>
+                        <li>Não pode ser uma senha muito comum</li>
+                        <li>Não pode ser totalmente numérica</li>
+                    </ul>
+                </div>
+
+                <div class="auth-links">
+                    <button type="submit" class="auth-button">Registrar</button>
+                    <a href="{% url 'login' %}" class="auth-button" style="text-decoration: none; text-align: center;">Já tenho conta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

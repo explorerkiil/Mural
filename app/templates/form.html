@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Mensagem</title>
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'SiteIcon
+    .png' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=1.1">
+</head>
+<body>
+    <div class="custom-container">
+        <div class="row mt-4">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-3">Nova Mensagem</h2>
+                        <div id="result"></div>
+                        <form id="form" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.mensagem }}
+                            </div>
+                            <div class="text-center">
+                                <a href="{% url 'mural' %}" class="btn btn-secondary">Voltar</a>
+                                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'piii.min.js' %}"></script>
+    <script src="{% static 'javascript.js' %}"></script>
+</body>
+</html>
